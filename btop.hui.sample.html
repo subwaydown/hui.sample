@@ -1,0 +1,421 @@
+﻿<!--Created by luo on 2016/3/21.-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>btop.hui.sample</title>
+    <link rel="stylesheet" type="text/css" href="btop.hui.css" />
+    <script type="text/javascript" src="btop.hui.js"></script>
+    <script type="text/javascript" src="jquery-2.1.3.min.js"></script><script>
+    function init() {
+        btop.hui.HuiLoader.load();
+        btop.hui.HuiParser.parse(document.body);
+        select();
+        amount();
+        datePick();
+    }
+    // 弹出框
+    function popAlert() {
+//        btop.hui.WidgetManager.byId("partAlert").show({
+//            title: "提示",
+//            content: "我是弹出框",
+//            buttons: ["确定","取消"]
+//        });
+        // 全局
+        btop.hui.Global.Alert.show({
+            title: "提示",
+            content: "我是弹出框",
+            buttons: ["确定","取消"]
+        });
+    }
+    // 下拉框
+    function select() {
+        var opt1 = {
+            dataJson: {
+                "01": "apple",
+                "02": "banana",
+                "03": "orange"
+            }
+        };
+        btop.hui.WidgetManager.byId("selectOptDemo1").initData(opt1);
+        var opt2 = {
+            dataJson: {
+                "01": "BMW",
+                "02": "Benz",
+                "03": "Volvo"
+            }
+        };
+        btop.hui.WidgetManager.byId("selectOptDemo2").initData(opt2);
+    }
+    // 金额场
+    function amount(){
+        var amount1 = btop.hui.WidgetManager.byId("amount1");
+        /**
+         * setAmount: 设置金额
+         * getAmount: 获得金额的字符串
+         * getFloatAmt: 获得浮点型的金额值
+         */
+        //amount1.setAmount(String(-100));
+        console.info(amount1.getAmount());
+        console.info(amount1.getFloatAmt());
+    }
+    // 进度条
+
+    // 日期选择
+    function datePick(){
+        // 设置日期值
+        btop.hui.WidgetManager.byId("datepicker1").setDate({ year: 2013, month: 1, date: 13 });
+    }
+    // 手写板
+    function writePanel(){
+        //btop.hui.WidgetManager.byId("writePanel1").show();
+    }
+    // 蒙板
+    function waitPanel(){
+        //btop.hui.WidgetManager.byId("waitPanel1").show("正在加载...");
+        // 全局
+        btop.hui.Global.WattPanel.show("正在加载...");
+        setTimeout(function(){
+            btop.hui.Global.WattPanel.hide();
+        }, 1000);
+    }
+</script>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        font-family: "Microsoft YaHei UI",Georgia,SansSerif;
+        margin: 0;
+        font-size: 1.5vw;
+    }
+    html *{
+        box-sizing: border-box!important;
+    }
+
+    div[hui-layout-type="HeaderFooterlayout"] {
+        width: 100%;
+        height: 100%
+    }
+
+    div[class="hui-layout-topRegion"] {
+        text-align: center;
+        border-bottom: 1px solid green;
+        font-size: 1.5rem;
+        /*line-height: 3rem;*/
+        color: #42B983;
+    }
+
+    div[class="hui-layout-midRegion"] {
+        background-color: white;
+    }
+
+    div[class="hui-layout-bottomRegion"] {
+        text-align: center;
+        background-color: lightgray;
+        font-size: 1rem;
+        /*line-height: 2rem;*/
+    }
+
+    div[class="hui-layout-leftRegion"] {
+        background-color: white;
+        overflow: auto;
+    }
+
+    div[class="hui-layout-rightRegion"] {
+        background-color: white;
+        overflow: auto;
+    }
+
+    .modifyTip{
+        float: right;
+        font-size: .5em;
+        color: #C3C3C3;
+        font-style: italic;
+        font-family: cursive;
+    }
+    .navigateDiv{
+        padding: 2vh 2vw;
+    }
+    .navigateDiv a{
+        margin: 1vw 0;
+        text-decoration: none;
+        display: block;
+        color: gray;
+        font-size: 1rem;
+    }
+    .navigateDiv a:hover{
+        color: #42B983;
+        text-decoration: underline;
+    }
+    .contentDiv > div{
+        margin-top: 4vw;
+    }
+    .contentDiv p a{
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+    .contentDiv p a:active
+    ,.contentDiv p a:hover
+    ,.contentDiv p a:visited{
+        color: black;
+    }
+    .contentDiv p a span{
+        color: #42B983;
+        font-size: 1.2em;
+        vertical-align: top;
+        font-weight: bold;
+        margin-right: 0.2ch;
+    }
+    .HTMLDiv
+    ,.JSDiv{
+        padding: 2.5vw 2.5vw 1vw 2vw;
+        margin: 1vw 0;
+        width: 75%;
+        /*height: 15vw;*/
+        background-color: #F8F8F8;
+    }
+    .componentDiv{
+        padding: 2.5vw 2.5vw 1vw 2vw;
+        margin: 1vw 0;
+        width: 75%;
+        /*height: 15vw;*/
+        background-color: white;
+        border: 2px solid #F8F8F8;
+    }
+    .HTMLDiv:before
+    ,.JSDiv:before
+    ,.componentDiv:before{
+        color: gray;
+        float: right;
+        margin: -1.5vw -1.5vw 0 0;
+        font-size: 0.8em;
+    }
+    .HTMLDiv:before{
+        content: "HTML";
+    }
+    .JSDiv:before{
+        content: "JS";
+    }
+    pre {
+        font-family: "Microsoft YaHei UI",Georgia,SansSerif;
+        font-size: 0.95em;
+        color: #5C5C5C;
+        word-wrap: break-word;
+    }
+    pre.comment {
+        color: #629755;
+        font-style:italic;
+        font-family: cursive;
+        font-size: .8em;
+    }
+</style>
+</head>
+<body onload="init()">
+<div hui-layout-type='HeaderFooterLayout' hui-layout-attr='{"heights" : ["5%", "92%", "3%"]}'>
+    <div>
+        <div>btop.ui案例</div>
+        <div class="modifyTip">
+            <span>Last modified on </span>
+            <span class="timeStamp">2016/03/29</span>
+        </div>
+    </div>
+    <div hui-layout-type='FillLayout'>
+        <div hui-layout-type='SashLayout'>
+            <div>
+                <div class="navigateDiv">
+                    <a href="#layoutDemo">1.页面布局组件</a>
+                    <a href="#alertDemo">2.弹出框组件</a>
+                    <a href="#selectDemo">3.下拉框组件</a>
+                    <a href="#processBarDemo">4.进度条组件</a>
+                    <a href="#amountDemo">5.金额场组件</a>
+                    <a href="#datePickerDemo">6.日期选择组件</a>
+                    <a href="#waitPanelDemo">7.蒙板组件</a>
+                    <a href="#writePanelDemo">8.手写板组件</a>
+                </div>
+            </div>
+            <div>
+                <div class="contentDiv">
+                    <div id="layoutDemo">
+                        <p><a href="#layoutDemo"><span>#</span>页面布局组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div hui-layout-type='HeaderFooterLayout'>
+    &lt;div>&lt;/div>
+    &lt;div hui-layout-type='FillLayout'>
+        &lt;div hui-layout-type='SashLayout'>
+            &lt;div>&lt;/div>
+            &lt;div>&lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;div>&lt;/div>
+&lt;/div>
+                        </pre>
+                        </div>
+                        <!--<div class="JSDiv">-->
+                        <!--<pre>-->
+                        <!--</pre>-->
+                        <!--</div>-->
+                        <div class="componentDiv" style="height: 15vw;">
+                            <img src="layout.png" style="width: 30%;"/>
+                        </div>
+                    </div>
+                    <div id="alertDemo">
+                        <p><a href="#alertDemo"><span>#</span>弹出框组件</a></p>
+                        <div class="HTMLDiv">
+                            <pre>
+&lt;div id="partAlert" hui-widget-type="btop.hui.Alert">&lt;/div>
+&lt;button onclick="popAlert()">点击我弹出Alert&lt;/button>
+                            </pre>
+                        </div>
+                        <div class="JSDiv">
+                            <pre>
+btop.hui.Global.Alert.show({
+    title: "提示",
+    content: "我是弹出框",
+    buttons: ["确定","取消"]
+});
+                            </pre>
+                        </div>
+                        <div class="componentDiv" style="height: 8vw;">
+                            <div id="partAlert" hui-widget-type="btop.hui.Alert"></div>
+                            <button onclick="popAlert()">点击我弹出全局Alert</button>
+                        </div>
+                    </div>
+                    <div id="selectDemo">
+                        <p><a href="#selectDemo"><span>#</span>下拉框组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="selectOptDemo" hui-widget-type="btop.hui.Select">&lt;/div>
+                        </pre>
+                        </div>
+                        <div class="JSDiv">
+                        <pre>
+var opt = {
+    dataJson: {
+        "01": "apple",
+        "02": "banana",
+        "03": "orange"
+    }
+};
+btop.hui.WidgetManager.byId("selectOptDemo").initData(opt);
+                        </pre>
+                        </div>
+                        <div class="componentDiv" style="height: 10vw;">
+                            <div id="selectOptDemo1" hui-widget-type="btop.hui.Select" style="display: inline-block;"></div>
+                            <div id="selectOptDemo2" hui-widget-type="btop.hui.Select" style="display: inline-block;margin-left: 2vw;"></div>
+                        </div>
+                    </div>
+                    <div id="processBarDemo">
+                        <p><a href="#processBarDemo"><span>#</span>进度条组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="processBar" hui-widget-type = "btop.hui.ProcessBar"
+        hui-widget-attr='{"steps":["第一步", "第二步", "第三步"], "gotoStep": "1"}'>
+&lt;/div>
+                        </pre>
+                        </div>
+                        <!--<div class="JSDiv">-->
+                        <!--<pre>-->
+                        <!--</pre>-->
+                        <!--</div>-->
+                        <div class="componentDiv" style="height: 10vw;">
+                            <div id="processBar" hui-widget-type = "btop.hui.ProcessBar"
+                                 hui-widget-attr='{"steps":["第一步", "第二步", "第三步"], "gotoStep": "1"}'>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="amountDemo">
+                        <p><a href="#amountDemo"><span>#</span>金额场组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="amount1" hui-widget-type="btop.hui.Amount"
+        hui-widget-attr='{"decimalLen":"3","maxLength":"10","minus":"false"}'>
+&lt;/div>
+                        </pre>
+                        </div>
+                        <div class="JSDiv">
+                        <pre class="comment">
+/**
+ * setAmount: 设置金额
+ * getAmount: 获得金额的字符串
+ * getFloatAmt: 获得浮点型的金额值
+ */
+                        </pre>
+                        <pre>
+var amount1 = btop.hui.WidgetManager.byId("amount1");
+//amount1.setAmount(String(-100));
+console.info(amount1.getAmount());
+console.info(amount1.getFloatAmt());
+                        </pre>
+                        </div>
+                        <div class="componentDiv" style="height: 10vw;">
+                            <div id="amount1" hui-widget-type="btop.hui.Amount"
+                                 hui-widget-attr='{"decimalLen":"3","maxLength":"10","minus":"false"}'>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="datePickerDemo">
+                        <p><a href="#datePickerDemo"><span>#</span>日期选择组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="datepicker1" hui-widget-type="btop.hui.DatePicker"
+        hui-widget-attr='{"format" : "yyyy-MM-dd"}'>
+&lt;/div>
+                        </pre>
+                        </div>
+                        <div class="JSDiv">
+                        <pre>
+// 设置日期值
+btop.hui.WidgetManager.byId("datepicker1").setDate({ year: 2013, month: 1, date: 13 });
+                        </pre>
+                        </div>
+                        <div class="componentDiv" style="height: 10vw;">
+                            <div id="datepicker1" hui-widget-type="btop.hui.DatePicker"
+                                 hui-widget-attr='{"format" : "yyyy-MM-dd"}'>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="waitPanelDemo">
+                        <p><a href="#waitPanelDemo"><span>#</span>蒙板组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="waitPanel1" hui-widget-type="btop.hui.WattPanel">&lt;/div>
+&lt;button type="button" onclick="waitPanel();">弹出蒙板&lt;/button>
+                        </pre>
+                        </div>
+                        <div class="JSDiv">
+                        <pre>
+btop.hui.Global.WattPanel.show("正在加载...");
+                        </pre>
+                        </div>
+                        <div class="componentDiv" style="height: 10vw;">
+                            <div id="waitPanel1" hui-widget-type="btop.hui.WattPanel"></div>
+                            <button type="button" onclick="waitPanel();">弹出全局蒙板</button>
+                        </div>
+                    </div>
+                    <div id="writePanelDemo">
+                        <p><a href="#writePanelDemo"><span>#</span>手写板组件</a></p>
+                        <div class="HTMLDiv">
+                        <pre>
+&lt;div id="writePanel1" hui-widget-type="btop.hui.HandWritingPanel">&lt;/div>
+                        </pre>
+                        </div>
+                        <!--<div class="JSDiv">-->
+                        <!--<pre>-->
+                        <!--</pre>-->
+                        <!--</div>-->
+                        <div class="componentDiv" style="height: 15vw;">
+                            <div id="writePanel1" hui-widget-type="btop.hui.HandWritingPanel" style="width: 100%;height: 90%;"></div>
+                            <!--<button type="button" onclick="writePanel();">点我签名</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span>Copyright @ YUSYS 2016 . All rights reserved.</span>
+    </div>
+</div>
+</body>
+</html>
